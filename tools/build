@@ -1,0 +1,48 @@
+#!/bin/sh
+set -euo pipefail
+
+base_image=rockbox/builder
+container_name=rockbox_builder
+
+header() {
+	echo -e "\n$1"
+	printf '#%.0s' {1..80}
+	echo
+}
+
+cleanup() {
+	docker rm -f $container_name &> /dev/null || true
+}
+
+main() {
+	header 'Rockbox builder'
+
+	trap cleanup EXIT INT TERM
+
+	build_dir=$(pwd)
+	tools_dir=$(dirname $0)
+	root_dir="$tools_dir/../"
+
+	header 'Setting up Rockbox builder Docker image...'
+	cd "$tools_dir"
+	docker build -t $base_image -f rockboxdev.Dockerfile .
+
+	echo
+	cat "$tools_dir/configure.platform"
+	read -p 'Enter target platform: ' target
+	echo
+
+	header 'Building Rockbox firmware...'
+	docker run \
+		-v "$root_dir":/__rockbox:Z \
+		-v "$build_dir":/__build:Z \
+		-i --entrypoint=/bin/sh \
+		--name $container_name $base_image -e <<- COMMANDS
+
+		cd /__build
+		/__rockbox/tools/configure --target=$target --type=n
+		make zip
+	COMMANDS
+}
+
+main

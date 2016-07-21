@@ -1383,61 +1383,7 @@ if [ "$ARG_TARGET" ]; then
   buildfor=$ARG_TARGET
 else
   echo "Enter target platform:"
-cat <<EOF
- ==Archos==               ==iriver==             ==Apple iPod==
-  0) Player/Studio        10) H120/H140          20) Color/Photo
-  1) Recorder             11) H320/H340          21) Nano 1G
-  2) FM Recorder          12) iHP-100/110/115    22) Video
-  3) Recorder v2          13) iFP-790            23) 3G
-  4) Ondio SP             14) H10 20Gb           24) 4G Grayscale
-  5) Ondio FM             15) H10 5/6Gb          25) Mini 1G
-  6) AV300                                       26) Mini 2G
-                          ==Toshiba==            27) 1G, 2G
- ==Cowon/iAudio==         40) Gigabeat F/X       28) Nano 2G
- 30) X5/X5V/X5L           41) Gigabeat S         29) Classic/6G
- 31) M5/M5L
- 32) 7                    ==Olympus=             ==SanDisk==
- 33) D2                   70) M:Robe 500         50) Sansa e200
- 34) M3/M3L               71) M:Robe 100         51) Sansa e200R
-                                                 52) Sansa c200
- ==Creative==             ==Philips==            53) Sansa m200
- 89) Zen X-Fi Style       100) GoGear SA9200     54) Sansa c100
- 90) Zen Vision:M 30GB    101) GoGear HDD1630/   55) Sansa Clip
- 91) Zen Vision:M 60GB         HDD1830           56) Sansa e200v2
- 92) Zen Vision           102) GoGear HDD6330    57) Sansa m200v4
- 93) Zen X-Fi2                                   58) Sansa Fuze
- 94) Zen X-Fi3            ==Meizu==              59) Sansa c200v2
- 96) Zen X-Fi             110) M6SL              60) Sansa Clipv2
- 97) Zen X-Mozaic         111) M6SP              61) Sansa View
- 98) Zen                  112) M3                62) Sansa Clip+
-                                                 63) Sansa Fuze v2
- ==Onda==                 ==Tatung==             64) Sansa Fuze+
- 120) VX747               150) Elio TPJ-1022     65) Sansa Clip Zip
- 121) VX767                                      66) Sansa Connect
- 122) VX747+              ==Packard Bell==
- 123) VX777               160) Vibe 500          ==Logik==
-                                                 80) DAX 1GB MP3/DAB
- ==Samsung==              ==MPIO==
- 140) YH-820              170) HD200             ==Lyre project==
- 141) YH-920              171) HD300             130) Lyre proto 1
- 142) YH-925                                     131) Mini2440
- 143) YP-S3
- 144) YP-Z5 ==ROCKCHIP==
-                          180) rk27xx generic    ==HiFiMAN==
- ==Application==                                 190) HM-60x
- 200) SDL                 ==HiFi E.T.==          191) HM-801
- 201) Android             210) MA9
- 202) Nokia N8xx          211) MA9C              ==Sony==
- 203) Nokia N900          212) MA8               220) NWZ-E370/E380 series
- 204) Pandora             213) MA8C              221) NWZ-E360 series
- 205) Samsung YP-R0
- 206) Android MIPS        ==IHIFI==              ==iBasso==
- 207) Android x86         230) 760               232) DX50
- 208) Samsung YP-R1       231) 960               233) DX90
-
-
-EOF
-
+  cat "$rootdir/tools/configure.platform"
   buildfor=`input`;
 
 fi
